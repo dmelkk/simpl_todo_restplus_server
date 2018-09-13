@@ -1,22 +1,18 @@
 # encoding: utf-8
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_bcrypt import Bcrypt
+from flask_restplus import Api
+from flask import Blueprint
 
-from config import config_by_name
 
-db = SQLAlchemy()
-flask_bcrypt = Bcrypt()
+from .auth.controller.user_controller import api as user_ns
 
-def create_app(config_name):
-    app = Flask(__name__)
-    app.config.from_object(config_by_name[config_name])
-    db.init_app(app)
-    flask_bcrypt.init_app(app)
-    #migrate = Migrate(app, db)
+blueprint = Blueprint('api', __name__)
 
-    #from app import models
+api = Api(blueprint,
+        title='SIMPLE TODO RESTPLUS SERVER',
+        version='1.0',
+        description='simple restplus api to ToDo manager server'
+        )
 
-    return app
+
+api.add_namespace(user_ns, path='/user')

@@ -5,9 +5,14 @@ class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    public_id = db.Column(db.String(128), unique=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     pasword_hash = db.Column(db.String(128))
+
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
+
+    registerd_on = db.Column(db.DateTime, nullable=False)
 
     @property
     def password(self):

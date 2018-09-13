@@ -4,10 +4,12 @@ import unittest
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
-from app import db, create_app
-from app.model import user
+from app import blueprint
+from app.auth import db, create_app
+from app.auth.model import user
 
 app = create_app(os.getenv('CONFIGURATION_SETTING') or 'dev')
+app.register_blueprint(blueprint)
 
 app.app_context().push()
 
