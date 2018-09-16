@@ -6,7 +6,9 @@ from flask_script import Manager
 
 from app import blueprint
 from app.auth import db, create_app
+
 from app.auth.model import user
+from app.auth.model import blacklist
 
 app = create_app(os.getenv('CONFIGURATION_SETTING') or 'dev')
 app.register_blueprint(blueprint)
