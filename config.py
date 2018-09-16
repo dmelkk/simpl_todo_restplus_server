@@ -9,7 +9,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or \
             'sqlite:///' + os.path.join(PROJECT_ROOT, 'app.db')
 
-    DEBUG = False
+    DEBUG = True
 
 
 class ProductionConfig(Config):
